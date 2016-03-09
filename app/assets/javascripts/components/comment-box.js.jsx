@@ -11,11 +11,19 @@ class CommentBox extends React.Component {
 		}
 	}
 
+	addComment(userInput){
+		//Ajax to my rails API
+		var comment = { user:"Anonymous", content: userInput}
+		var comments = this.state.comments 
+		comments.push(comment);
+		this.setState({ comments: comments })
+	}
+
 	render(){
 		return(
 			<div className="comment-wrapper">
 				<CommentList comments={ this.state.comments }/>
-				<CommentForm />
+				<CommentForm onCommentAdd={this.addComment.bind(this)}/>
 			</div>
 		)
 	}
